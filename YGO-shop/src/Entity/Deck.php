@@ -15,12 +15,19 @@ class Deck
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $owner = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $owner = null;
 
     #[ORM\OneToMany(mappedBy: 'deck', targetEntity: Card::class, orphanRemoval: true, cascade: ["persist"])]
 
     private Collection $cards;
+
+    #[ORM\ManyToOne(inversedBy: 'decks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Member $member = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $d_name = null;
 
     public function __construct()
     {
@@ -32,17 +39,7 @@ class Deck
         return $this->id;
     }
 
-    public function getOwner(): ?string
-    {
-        return $this->owner;
-    }
 
-    public function setOwner(string $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Card>
@@ -72,5 +69,33 @@ class Deck
         }
 
         return $this;
+    }
+
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    public function setMember(?Member $member): self
+    {
+        $this->member = $member;
+
+        return $this;
+    }
+
+    public function getDName(): ?string
+    {
+        return $this->d_name;
+    }
+
+    public function setDName(string $d_name): self
+    {
+        $this->d_name = $d_name;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getDName();
     }
 }
