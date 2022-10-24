@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ card.getCardName() }}{% endblock %}
+{% block body %}
+
+<h1> {{ card.getCardName }} </h1>
+<span> Deck: {{card.getDeck()}} </span>
+
+<table style="border-spacing: 1rem ;">
+    <thead>
+        <tr>
+            <th> card_name </th>
+            <th> card_class </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr> 
+            <td> {{card.getCardName()}} </td>
+            <td> {{card.getCardClass()}} </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

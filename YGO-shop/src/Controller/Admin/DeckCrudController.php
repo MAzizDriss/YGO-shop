@@ -24,6 +24,9 @@ class DeckCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('d_name'),
             AssociationField::new('member'),
+            AssociationField::new('cards')
+            ->onlyOnDetail()
+            ->setTemplatePath('admin/fields/Deck_Cards.html.twig')
         ];
     }
 
