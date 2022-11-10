@@ -24,9 +24,13 @@ class Member
     #[ORM\OneToMany(mappedBy: 'member', targetEntity: Deck::class, orphanRemoval: true, cascade: ["persist"])]
     private Collection $decks;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Showroom::class, orphanRemoval: true)]
+    private Collection $showrooms;
+
     public function __construct()
     {
         $this->decks = new ArrayCollection();
+        $this->showrooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,5 +95,35 @@ class Member
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection<int, Showroom>
+     */
+    public function getShowrooms(): Collection
+    {
+        return $this->showrooms;
+    }
+
+    public function addShowroom(Showroom $showroom): self
+    {
+        if (!$this->showrooms->contains($showroom)) {
+            $this->showrooms->add($showroom);
+            $showroom->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShowroom(Showroom $showroom): self
+    {
+        if ($this->showrooms->removeElement($showroom)) {
+            // set the owning side to null (unless already changed)
+            if ($showroom->getOwner() === $this) {
+                $showroom->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

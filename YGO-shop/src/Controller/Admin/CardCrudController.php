@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Card;
+use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -26,6 +27,11 @@ class CardCrudController extends AbstractCrudController
             TextField::new('card_name'),
             TextField::new('card_class'),
             AssociationField::new('deck'),
+            AssociationField::new('categories') // remplacer par le nom de l'attribut spécifique, par exemple 'bodyShape'
+            ->onlyOnDetail()
+            ->formatValue(function ($value, $entity) {
+            return implode(', ', $entity->getCategories()->toArray()); // ici getBodyShapes()
+        })
         ];
     }
 

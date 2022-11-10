@@ -1,0 +1,10 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        decks:
+          label: 'Decks'
+          route: 'app_deck'
+        cards:
+          label: 'Cards'
+          route: 'CardControllerlist_card'
