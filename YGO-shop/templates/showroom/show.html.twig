@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Showroom{% endblock %}
+
+{% block main %}
+    <h1>Showroom</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ showroom.id }}</td>
+            </tr>
+            <tr>
+                <th>Sr_name</th>
+                <td>{{ showroom.srName }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ showroom.description }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ showroom.published ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <h2>Cards</h2>
+    <ul>
+    {% for card in showroom.cards %}
+    <li>
+        <a href="{{ path('app_showroom_card_show', {'showroom_id': showroom.id, 'card_id' : card.id}) }}">{{ card }}</a>
+    </li>
+    {% endfor %}
+    </ul>
+
+
+    <a href="{{ path('app_showroom_index') }}">back to list</a>
+
+    <a href="{{ path('app_showroom_edit', {'id': showroom.id}) }}">edit</a>
+
+    {{ include('showroom/_delete_form.html.twig') }}
+{% endblock %}

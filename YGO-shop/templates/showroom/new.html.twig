@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Showroom{% endblock %}
+
+{% block main %}
+    <h1>Create new Showroom</h1>
+
+    {{ include('showroom/_form.html.twig') }}
+
+    <a href="{{ path('app_showroom_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Showroom index{% endblock %}
+
+{% block main %}
+    <h1>Showroom index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sr_name</th>
+                <th>Description</th>
+                <th>Published</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for showroom in showrooms %}
+            <tr>
+                <td>{{ showroom.id }}</td>
+                <td>{{ showroom.srName }}</td>
+                <td>{{ showroom.description }}</td>
+                <td>{{ showroom.published ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_showroom_show', {'id': showroom.id}) }}">show</a>
+                    <a href="{{ path('app_showroom_edit', {'id': showroom.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_showroom_new') }}">Create new</a> #}
+{% endblock %}

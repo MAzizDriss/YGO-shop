@@ -19,12 +19,12 @@
 
         {% endblock %}
     </head>
-    <body>
+    <body style="min-height: 100vh;">
         {% block menu %}
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-            <a class="navbar-brand" href="{{ path('home') }}">YGO-Shop</a>
+            <a class="navbar-brand" href="{{ path('app_card_index') }}">YGO-Shop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -34,6 +34,57 @@
             </div>
         </nav>
         {% endblock %}{# menu #}
-        {% block body %}{% endblock %}
+        
+{% block body %}
+<div class="container body-container" style=" padding-top:30px;">
+
+{% block alerts %}
+  {% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        {%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+        {%if type == 'message'%} {% set type = 'info' %} {%endif%}
+        {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
+        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <p>{{ message|raw }}</p>
+        </div>
+    {% endfor %}
+  {% endfor %}
+{% endblock %} {# alerts #}
+
+  <div class="container body-container">
+
+    <main>
+
+      {# Ici la partie utile que les gabarits des pages vont surcharger #}
+      {% block main %}
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <i>MAIN</i>
+          </p>
+        </div>
+      </div>
+      {% endblock %} {# main #}
+
+    </main>
+
+  </div> <!-- /.body-container -->
+
+
+{% endblock %} {# body #}
     </body>
+
+
+  <footer  style=" position:absolute; right:0.00000001%; width:100%; margin-top: 120px;">
+  {% block footer %}
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      FOOTER
+    </div>
+    {% endblock %}{# footer #}
+  </footer>
+  
 </html>

@@ -1,28 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ deck.getDname() }}{% endblock %}
-{% block body %}
+{% block title %}Deck{% endblock %}
 
-<h1> {{ deck.getDname() }} </h1>
-<span> Owner: {{deck.getMember()}} </span>
+{% block main %}
+    <h1>Deck</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th> card_name </th>
-            <th> card_class </th>
-            <th> &nbsp </th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for card in d_cards %}
-        <tr> 
-            <td> {{card.getCardName()}} </td>
-            <td> {{card.getCardClass()}} </td>
-            <td> <a href="{{ path('CardControllercard_show', {'id': card.id})}}"> show </a> </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ deck.id }}</td>
+            </tr>
+            <tr>
+                <th>D_name</th>
+                <td>{{ deck.dName }}</td>
+            </tr>
+        </tbody>
+    </table>
 
+    <a href="{{ path('app_deck_index') }}">back to list</a>
+
+    <a href="{{ path('app_deck_edit', {'id': deck.id}) }}">edit</a>
+
+    {{ include('deck/_delete_form.html.twig') }}
 {% endblock %}

@@ -4,7 +4,13 @@ bootstrap_menu:
       items:
         decks:
           label: 'Decks'
-          route: 'app_deck'
+          route: 'app_deck_index'
         cards:
           label: 'Cards'
-          route: 'CardControllerlist_card'
+          route: 'app_card_index'
+        showrooms:
+          label: 'Showrooms'
+          route: 'app_showroom_index'
+        members:
+          label: 'Duelists'
+          route: 'app_member_index'
