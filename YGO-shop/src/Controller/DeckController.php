@@ -22,9 +22,14 @@ class DeckController extends AbstractController
         $decks = array();
         if($user){
             $member = $user->getMember();
+            //The IDE signals this line as an error but thankfully it does work 
+
             $decks = $deckRepository->findBy([
                     'member' => $member
             ]);
+        }
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $decks = $deckRepository->findAll();
         }
         return $this->render('deck/index.html.twig', [
             'decks' => $decks,

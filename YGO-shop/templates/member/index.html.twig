@@ -10,7 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Description</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             <tr>
                 <td>{{ member.id }}</td>
                 <td>{{ member.name }}</td>
-                <td>{{ member.description }}</td>
                 <td>
                     <a href="{{ path('app_member_show', {'id': member.id}) }}">show</a>
                     <a href="{{ path('app_member_edit', {'id': member.id}) }}">edit</a>

@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Deck;
-use App\Repository\DeckRepository;
-use App\Repository\MemberRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Card;
@@ -31,9 +29,13 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
 
     private static function membersDataGenerator()
     {
-        yield ["Aziz","eh","aziz@localhost"];
-        yield ["Kaiba","no","kaiba@localhost"];
-        yield ["Yugi", "yey","yugi@localhost"];
+        yield ["Aziz Driss","A TSP student and a beginner at YGO cards, Full of amibition and enthusiasm this young man
+        is taking an advanture to learn about the Dueling world!","aziz@localhost"];
+        yield ["Seto Kaiba","As the majority shareholder and CEO of his own multi-national gaming company, Kaiba Corporation,
+         Kaiba is reputed to be Japan's greatest gamer and aims to become the world's
+          greatest player of the American card game, Duel Monsters.","kaiba@localhost"];
+        yield ["Yugi Mutou", "Yugi is introduced as a teenager who is solving an ancient Egyptian puzzle known as the Millennium Puzzle, 
+        hoping it will grant him his wish of forming bonds","yugi@localhost"];
     }
 
     /**
@@ -43,9 +45,9 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
 
     private static function decksDataGenerator()
     {
-        yield ["Aziz's Deck","Aziz"];
-        yield ["Kaiba's Deck","Kaiba"];
-        yield ["Yugi's Deck","Yugi"];
+        yield ["Creator's privilege","Aziz Driss"];
+        yield ["Off-Dragon Deck","Seto Kaiba"];
+        yield ["Heart of Cards","Yugi Mutou"];
     }
 
     /**
@@ -85,16 +87,16 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     private static function CardsGenerator()
     {
-        yield ["Blue-Eyes White Dragon", "Dragon", "Aziz's Deck"];
-        yield ["Cyber Eternity Dragon", "Machine Fusion Effect", "Aziz's Deck"];
-        yield ["Cyberload Fusion", "Spell", "Aziz's Deck"];
-        yield ["Continuous Trap", "Trap_card", "Kaiba's Deck"];
-        yield ["Beast King Barbaros", "Beast-Warrior Effect", "Kaiba's Deck"];
-        yield ["Breaker the Magical Warrior", "Spellcaster Effect", "Kaiba's Deck"];
-        yield ["Stardust Synchron", "Machine Effect", "Yugi's Deck"];
-        yield ["Saambell the Star Bonder", "Spellcaster Effect", "Yugi's Deck"];
-        yield ["Despian Comedy", "Effect", "Yugi's Deck"];
-        yield ["Stardust Trail", "Dragon Effect", "Yugi's Deck"];  
+        yield ["Blue-Eyes White Dragon", "Dragon", "Creator's privilege"];
+        yield ["Cyber Eternity Dragon", "Machine Fusion Effect", "Creator's privilege"];
+        yield ["Cyberload Fusion", "Spell", "Creator's privilege"];
+        yield ["Continuous Trap", "Trap_card", "Off-Dragon Deck"];
+        yield ["Beast King Barbaros", "Beast-Warrior Effect", "Off-Dragon Deck"];
+        yield ["Breaker the Magical Warrior", "Spellcaster Effect", "Off-Dragon Deck"];
+        yield ["Stardust Synchron", "Machine Effect", "Heart of Cards"];
+        yield ["Saambell the Star Bonder", "Spellcaster Effect", "Heart of Cards"];
+        yield ["Despian Comedy", "Effect", "Heart of Cards"];
+        yield ["Stardust Trail", "Dragon Effect", "Heart of Cards"];  
     }
 
     public function load(ObjectManager $manager)

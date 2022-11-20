@@ -25,7 +25,6 @@ class CardCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('card_name'),
-            TextField::new('card_class'),
             AssociationField::new('deck'),
             AssociationField::new('categories') // remplacer par le nom de l'attribut spécifique, par exemple 'bodyShape'
             ->onlyOnDetail()

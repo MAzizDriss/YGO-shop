@@ -37,7 +37,7 @@ class ShowroomController extends AbstractController
                 $showrooms = $showroomRepository->findAll();
             }
             else{
-
+                //The IDE signals this line as an error but thankfully it does work 
                 $member = $user->getMember();
                 $privateShowrooms = $showroomRepository->findBy(
             [

@@ -20,6 +20,7 @@ class CardController extends AbstractController
             $cards = $cardRepository->findAll();
         }
         else {
+            //The IDE signals this line as an error but thankfully it does work 
             $member = $this->getUser()->getMember();
             // $member_decks = $member->getDecks();
             // $cards= array();

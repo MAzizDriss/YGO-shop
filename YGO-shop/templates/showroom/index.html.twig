@@ -9,9 +9,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Sr_name</th>
-                <th>Description</th>
+                <th>Showroom name</th>
+                <th>Creator</th>
                 <th>Published</th>
+
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,7 +21,7 @@
             <tr>
                 <td>{{ showroom.id }}</td>
                 <td>{{ showroom.srName }}</td>
-                <td>{{ showroom.description }}</td>
+                <td>{{ showroom.Owner }}</td>
                 <td>{{ showroom.published ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_showroom_show', {'id': showroom.id}) }}">show</a>

@@ -8,8 +8,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>D_name</th>
+                <th>ID</th>
+                <th>Deck Name</th>
+                <th> Owner </th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ deck.id }}</td>
                 <td>{{ deck.dName }}</td>
+                <td>{{ deck.member }}</td>
                 <td>
                     <a href="{{ path('app_deck_show', {'id': deck.id}) }}">show</a>
                     <a href="{{ path('app_deck_edit', {'id': deck.id}) }}">edit</a>
