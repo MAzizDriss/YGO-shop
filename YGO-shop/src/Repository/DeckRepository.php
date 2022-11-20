@@ -32,8 +32,15 @@ class DeckRepository extends ServiceEntityRepository
 
     public function remove(Deck $entity, bool $flush = false): void
     {
+        $cardRepository = $this->getEntityManager()->getRepository(Card::class);
+    
+        // clean the cards properly
+        $cards = $entity->getCards();
+        foreach($cards as $card) {
+            $cardRepository->remove($card, $flush);
+        }
         $this->getEntityManager()->remove($entity);
-
+    
         if ($flush) {
             $this->getEntityManager()->flush();
         }

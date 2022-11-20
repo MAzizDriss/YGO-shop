@@ -27,6 +27,9 @@ class Member
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Showroom::class, orphanRemoval: true)]
     private Collection $showrooms;
 
+    #[ORM\OneToOne(inversedBy: 'member', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->decks = new ArrayCollection();
@@ -123,6 +126,18 @@ class Member
                 $showroom->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

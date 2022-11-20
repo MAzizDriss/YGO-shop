@@ -9,8 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Card_name</th>
-                <th>Card_class</th>
+                <th>Card Name</th>
+                <th>Card Categories</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ card.id }}</td>
                 <td>{{ card.cardName }}</td>
-                <td>{{ card.cardClass }}</td>
+                <td>{{ card.Categories|join(', ') }}</td>
                 <td>
                     <a href="{{ path('app_card_show', {'id': card.id}) }}">show</a>
                     <a href="{{ path('app_card_edit', {'id': card.id}) }}">edit</a>

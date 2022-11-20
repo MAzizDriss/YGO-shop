@@ -16,8 +16,25 @@ class CardController extends AbstractController
     #[Route('/', name: 'app_card_index', methods: ['GET'])]
     public function index(CardRepository $cardRepository): Response
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $cards = $cardRepository->findAll();
+        }
+        else {
+            $member = $this->getUser()->getMember();
+            // $member_decks = $member->getDecks();
+            // $cards= array();
+
+            // foreach($member_decks as $deck){
+            //      $cards = array_merge(
+            //         $cards,
+            //         $cardRepository->findBy(
+            //                 ['deck' => $deck])
+            //         );}
+            $cards = $cardRepository->findMemberCards($member);
+        }
+
         return $this->render('card/index.html.twig', [
-            'cards' => $cardRepository->findAll(),
+            'cards' => $cards,
         ]);
     }
 

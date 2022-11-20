@@ -8,23 +8,32 @@ use App\Repository\MemberRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Card;
+use App\Entity\User;
 use App\Entity\Category;
 use App\Entity\Member;
+use App\DataFixtures\UserFixtures;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
 
     /**
      * Generates initialization data for members : [name, description] //V0
      * @return \\Generator
      */
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class,
+        ];
+    }
 
     private static function membersDataGenerator()
     {
-        yield ["Aziz","eh"];
-        yield ["Kaiba","no"];
-        yield ["Yugi", "yey"];
+        yield ["Aziz","eh","aziz@localhost"];
+        yield ["Kaiba","no","kaiba@localhost"];
+        yield ["Yugi", "yey","yugi@localhost"];
     }
 
     /**
@@ -94,9 +103,13 @@ class AppFixtures extends Fixture
         $deckRepo = $manager->getRepository(Deck::class);
         $CatRepo = $manager->getRepository(Category::class);
         
-        foreach (self::membersDataGenerator() as [$name, $description] ) {
+        foreach (self::membersDataGenerator() as [$name, $description, $useremail] ) {
 
             $member = new Member();
+            if ($useremail) {
+                $user = $manager->getRepository(User::class)->findOneByEmail($useremail);
+                $member->setUser($user);
+            }
             $member->setName($name);
             $member->setDescription($description);
             $manager->persist($member);          
@@ -146,7 +159,6 @@ class AppFixtures extends Fixture
 
             $card = new Card();
             $card->setCardName($card_name);
-            $card->setCardClass("To be refractored");
 
             $cats_labels= explode(' ',$card_cats);
 

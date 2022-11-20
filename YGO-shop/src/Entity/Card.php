@@ -18,8 +18,6 @@ class Card
     #[ORM\Column(length: 255)]
     private ?string $card_name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $card_class = null;
 
     #[ORM\ManyToOne(inversedBy: 'cards')]
     #[ORM\JoinColumn(nullable: false)]
@@ -54,17 +52,6 @@ class Card
         return $this;
     }
 
-    public function getCardClass(): ?string
-    {
-        return $this->card_class;
-    }
-
-    public function setCardClass(string $card_class): self
-    {
-        $this->card_class = $card_class;
-
-        return $this;
-    }
 
     public function getDeck(): ?Deck
     {

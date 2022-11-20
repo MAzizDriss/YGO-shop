@@ -17,6 +17,13 @@
             </tr>
         </tbody>
     </table>
+    <h2 >Cards </h2>
+
+    {% for card in deck.cards %}
+    <li>
+        <a href="{{ path('app_card_show', {'id' : card.id}) }}">{{ card }}</a>
+    </li>
+    {% endfor %}
 
     <a href="{{ path('app_deck_index') }}">back to list</a>
 

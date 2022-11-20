@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Card;
+use App\Entity\Member;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,19 @@ class CardRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+     /**
+     * @return [Objet][] Returns an array of [Objet] objects for a member
+     */
+    public function findMemberCards(Member $member): array
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.deck', 'i')
+            ->andWhere('i.member = :member')
+            ->setParameter('member', $member)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 //    /**

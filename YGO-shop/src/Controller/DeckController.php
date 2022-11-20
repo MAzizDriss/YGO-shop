@@ -18,8 +18,16 @@ class DeckController extends AbstractController
     #[Route('/', name: 'app_deck_index', methods: ['GET'])]
     public function index(DeckRepository $deckRepository): Response
     {
+        $user = $this->getUser();
+        $decks = array();
+        if($user){
+            $member = $user->getMember();
+            $decks = $deckRepository->findBy([
+                    'member' => $member
+            ]);
+        }
         return $this->render('deck/index.html.twig', [
-            'decks' => $deckRepository->findAll(),
+            'decks' => $decks,
         ]);
     }
 

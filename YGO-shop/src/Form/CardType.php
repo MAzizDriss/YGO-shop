@@ -13,7 +13,6 @@ class CardType extends AbstractType
     {
         $builder
             ->add('card_name')
-            ->add('card_class')
             ->add('deck')
             ->add('categories')
             ->add('showrooms')
